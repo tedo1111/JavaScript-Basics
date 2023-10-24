@@ -1,6 +1,8 @@
-function squarearea() {
-    for (let i = 1; i < 11; i++) {
-        console.log(i);
-    }
+function squarearea(input) {
+
+    let a = Number(input);
+    let area = a * a;
+
+    console.log(area);
 }
-squarearea()
+squarearea(["5"]);
