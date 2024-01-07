@@ -19,5 +19,5 @@ function luckyNumbers(input) {
     console.log(res);
 }
 luckyNumbers(["3"]);
-// luckyNumbers(["7"]);
-// luckyNumbers(["24"]);
+luckyNumbers(["7"]);
+luckyNumbers(["24"]);
