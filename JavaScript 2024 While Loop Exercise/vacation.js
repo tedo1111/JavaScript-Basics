@@ -1,60 +1,36 @@
 function vacation(input) {
+    let targetAmount = Number(input.shift());
+    let availableMoney = Number(input.shift());
 
-    let needMoney = Number(input[0]);
-    let moneyInBank = Number(input[1]);
+    let consecutiveDays = 0;
+    let totalDays = 0;
 
+    while (availableMoney < targetAmount && consecutiveDays < 5) {
+        let action = input.shift();
+        let amount = Number(input.shift());
 
-    let move = "";
-    let money = 0;
-    dayCounter = 0;
-    let currentSpendStreak = 0;
-
-
-    let index = 2;
-    let currentElement = input[index];
-
-    while (currentSpendStreak !== 5) {
-
-        move = currentElement;
-        index++;
-        currentElement = input[index];
-        money = Number(currentElement);
-        dayCounter++;
-
-        if (move === `spend`) {
-            moneyInBank -= money;
-
-
-
-        }
-        if (move === "spend") {
-            currentSpendStreak++;
-        } else {
-            currentSpendStreak = 1;
+        if (action === "save") {
+            availableMoney += amount;
+            consecutiveDays = 0;
+        } else if (action === "spend") {
+            availableMoney -= amount;
+            consecutiveDays++;
         }
 
-        if (moneyInBank < 0) {
-            moneyInBank = 0;
+        if (availableMoney < 0) {
+            availableMoney = 0;
         }
 
-        if (move === `save`) {
-            moneyInBank += money;
-        }
-
-        if (needMoney <= moneyInBank) {
-            console.log(`You saved the money for ${dayCounter} days.`);
-            break;
-        }
-
-        index++;
-        currentElement = input[index];
-    }
-    if (currentSpendStreak === 5) {
-        console.log(`You can't save the money.\n${dayCounter}`);
-
+        totalDays++;
     }
 
+    if (consecutiveDays === 5) {
+        console.log("You can't save the money.");
+        console.log(totalDays);
+    } else {
+        console.log(`You saved the money for ${totalDays} days.`);
+    }
 }
-vacation(["2000", "1000", "spend", "1200", "save", "2000"]);
-vacation(["110", "60", "spend", "10", "spend", "10", "spend", "10", "spend", "10", "spend", "10"]);
-vacation(["250", "150", "spend", "50", "spend", "50", "save", "100", "save", "100"]);
+
+vacation([2000, 1000, "spend", 1200, "save", 2000]);
+vacation([2000, 1000, "spend", 2000, "spend", 2000, "spend", 2000, "spend", 2000, "spend"]); 
